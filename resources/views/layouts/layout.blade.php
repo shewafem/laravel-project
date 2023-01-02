@@ -27,30 +27,46 @@
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="/">Новости</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        <li li class="nav-item">
+          <a class="nav-link" href="/article/create">Создать новость</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
+          <a class="nav-link active" aria-current="page" href="/about">О нас</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
+          <a class="nav-link" href="/contact">Контакты</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="/registration">Регистрация</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/signin">Вход</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/signout">Выход</a>
+        </li>
+        <!--<li class="nav-item">
           <a class="nav-link disabled">Disabled</a>
-        </li>
+        </li>-->
       </ul>
     </div>
   </div>
 </nav>  
-<div class="container">
+<main>
+    <div class="container">
     @yield('content')
-</div>     
+    </div>     
+</main> 
+  <footer class="bg-light text-center text-lg-start">
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    Студенты группы 211-322
+  </div>
+</footer>
 </body>
 </html>
