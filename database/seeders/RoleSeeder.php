@@ -14,14 +14,13 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        if(Role::where('id', '2')){
-            return 0;
+        if (Role::where('role', 'moderator')->doesntExist()){
+            Role::create([
+                'role'=>'moderator',
+            ]);
+            Role::create([
+                'role'=>'reader',
+            ]);
         }
-        Role::create([
-            'role'=>'moderator',
-        ]);
-        Role::create([
-            'role'=>'reader',
-        ]);
     }
 }

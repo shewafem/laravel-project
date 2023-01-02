@@ -17,8 +17,15 @@ use App\Http\Controllers\CommentController;
 |
 */
 
+//Auth
+Route::get('/registration', [AuthController::class, 'index']);
+Route::post('/registration', [AuthController::class, 'store']);
+Route::get('/signin', [AuthController::class, 'login'])->name('login');
+Route::post('/signin', [AuthController::class, 'customLogin']);
+Route::get('/signout', [AuthController::class, 'signout']);
 Route::get('/', [ArticleController::class, 'index']);
 
+//Article
 Route::group(['prefix' => '/article', 'middleware'=>'auth:sanctum'], function(){
     Route::get('/create', [ArticleController::class, 'create']);
     Route::post('/store', [ArticleController::class, 'store']);
@@ -28,15 +35,11 @@ Route::group(['prefix' => '/article', 'middleware'=>'auth:sanctum'], function(){
     Route::get('/destroy/{id}', [ArticleController::class, 'destroy']);
 });
 
+//Comment
 Route::resource('comment', CommentController::class)->middleware('auth:sanctum');
 
 //Route::get('/', [MainController::class, 'index']);
 //Route::get('/galery/{full}', [MainController::class, 'show']);
-Route::get('/registration', [AuthController::class, 'index']);
-Route::post('/registration', [AuthController::class, 'store']);
-Route::get('/signin', [AuthController::class, 'login'])->name('login');
-Route::post('/signin', [AuthController::class, 'customLogin']);
-Route::get('/signout', [AuthController::class, 'signout']);
 
 Route::get('/about', function () {
     return view('main/about');

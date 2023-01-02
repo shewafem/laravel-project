@@ -17,9 +17,11 @@
     <div class="card-body">
     <h5 class="card-title">{{$comment->title}}</h5> <h6>({{$comment->created_at}})</h6>
     <h6 class="card-subtitle mb-2 text-muted">{{$comment->text}}</h6>
+    @can('update-comment', $comment)
     <a href="/comment/{{$comment->id}}/edit" class="btn btn-secondary">Редактировать</a>
     <!-- <a href="/comment/{{$comment->id}}" class="btn btn-secondary">Удалить</a> -->
-   <button type="submit" class="btn btn-secondary">Удалить</button>
+    <button type="submit" class="btn btn-secondary">Удалить</button>
+    @endcan
   </div>
   </form>
 
