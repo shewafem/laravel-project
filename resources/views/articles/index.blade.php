@@ -1,6 +1,5 @@
 @extends('layouts.layout')
 @section('content')
-<p>{{$user}}</p>
 <table class="table table-striped">
   <thead>
     <tr>

@@ -27,7 +27,7 @@ class AuthController extends Controller
         $user->password = Hash::make(request('password'));
         $user->save();
         $user->createToken('myapptoken')->plainTextToken;
-        return redirect('/signin');
+        return redirect()->route('login');
         // return response()->json($request);
     }
 
@@ -56,10 +56,10 @@ class AuthController extends Controller
 
     }
 
-    public function signout(){
-        auth()->user()->tokens()->delete();
-        return [
-            'message' => 'LoggedOut'
-        ];
+    public function signout(Request $request){
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/');
     }
 }

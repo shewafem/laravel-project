@@ -18,8 +18,7 @@ class ArticleController extends Controller
     {
         //
         $articles = Article::latest()->paginate(5);
-        $user = Auth::user();
-        return view('articles.index', ['articles' => $articles, 'user' => $user]);
+        return view('articles.index', ['articles' => $articles]);
     }
 
     /**
@@ -108,6 +107,7 @@ class ArticleController extends Controller
     public function destroy($id)
     {
         $article = Article::FindOrFail($id);
+        Comment::where('article_id', $id)->delete();
         $article->delete();
         return redirect('/');
     }
