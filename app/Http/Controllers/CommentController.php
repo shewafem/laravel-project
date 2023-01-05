@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Article;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendMail;
 
 class CommentController extends Controller
 {
@@ -17,7 +19,19 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
+        $comments = Comment::where('accept', null)->latest()->paginate(10);
+        return view('comment.index', ['comments'=>$comments]);
+    }
+
+    public function accept(Comment $comment){
+        $comment->accept = 1;
+        $comment->save();
+        return redirect()->route('comment.index');
+    }
+    public function reject(Comment $comment){
+        $comment->accept = 0;
+        $comment->save();
+        return redirect()->route('comment.index');
     }
 
     /**
@@ -49,6 +63,8 @@ class CommentController extends Controller
         $comment->article()->associate($article); 
         $comment->user()->associate(Auth::id());
         $comment->save();
+        $msg = new SendMail('Добавлен новый комментарий к статье '.$article->name.'. Комментарий: '.$comment->text);
+        Mail::send($msg);
         return redirect('/article/show/'.request('id'));
     }
 

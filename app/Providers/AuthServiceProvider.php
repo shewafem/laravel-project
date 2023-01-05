@@ -28,6 +28,12 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+        Gate::before(function(User $user){
+            if ($user->role_id == 1){
+                return true;
+            }
+        });
+
         Gate::define('update-comment', function(User $user, Comment $comment){
             return $user->id == $comment->user_id ?
                 Response::allow() :
