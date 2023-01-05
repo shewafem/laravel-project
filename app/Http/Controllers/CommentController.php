@@ -62,10 +62,10 @@ class CommentController extends Controller
         $comment->text = request('text');
         $comment->article()->associate($article); 
         $comment->user()->associate(Auth::id());
-        $comment->save();
+        $result = $comment->save();
         $msg = new SendMail('Добавлен новый комментарий к статье '.$article->name.'. Комментарий: '.$comment->text);
         Mail::send($msg);
-        return redirect('/article/show/'.request('id'));
+        return redirect('/article/show/'.request('id'))->with('result', $result);
     }
 
     /**

@@ -10,6 +10,12 @@
   </div>
 </div>
 <h3 class="text-center">Комментарии</h3>
+@if (session('result'))
+    <div class="alert alert-info">
+    Ваш комментарий ожидает модерации.
+    </div>
+@endif
+
   @foreach($comments as $comment)
   <form action="/comment/{{$comment->id}}" method="post">
     @method('DELETE')
